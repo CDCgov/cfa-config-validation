@@ -1,10 +1,9 @@
 import json 
-import os
 from flask import Flask, Response, request
 from http import HTTPStatus
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError, SchemaError
-from api.utils import CONSTANTS
+from api.utils import CONSTANTS, load_schema
 
 app = Flask(__name__)
 
@@ -31,9 +30,7 @@ def validate_config():
     
     # Load schema; locally for now. Return early if loading fails
     try:
-        schema_path = os.path.join(CONSTANTS.get("base_dir", ""), CONSTANTS.get("local_schema_path", ""))
-        with open(schema_path) as fp:
-            schema = json.load(fp)
+       schema = load_schema(local=True)
     except (json.decoder.JSONDecodeError, FileNotFoundError) as err:
         return Response(response=str(err), status=HTTPStatus.BAD_REQUEST)
 
@@ -47,3 +44,5 @@ def validate_config():
     
     return request_json, HTTPStatus.OK
 
+if __name__ == "__main__":
+    app.run(debug=True)

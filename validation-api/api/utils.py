@@ -1,4 +1,5 @@
 import os
+import json
 
 CONSTANTS = {
      "base_dir": os.path.abspath(os.path.dirname(__file__)),
@@ -6,7 +7,7 @@ CONSTANTS = {
 }
 
 def load_schema(local=True):
-     """Load schema to compare configuration against.
+    """Load schema to compare configuration against.
 
     This function loads a schema to compare the user-
     provided configuration object against. Currently,
@@ -24,6 +25,8 @@ def load_schema(local=True):
 
     Raises:
         json.decoder.JSONDecodeError: If the schema JSON is invalid.
-    """
-     
-     pass
+    """ 
+    schema_path = os.path.join(CONSTANTS.get("base_dir", ""), CONSTANTS.get("local_schema_path", ""))
+    with open(schema_path) as fp:
+        schema = json.load(fp)
+    return schema
