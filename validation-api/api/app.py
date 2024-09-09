@@ -1,7 +1,9 @@
 import json 
 import os
-from flask import Flask, Response
+from flask import Flask, Response, request
 from http import HTTPStatus
+from jsonschema import validate
+from jsonschema.exceptions import ValidationError, SchemaError
 from api.utils import CONSTANTS
 
 app = Flask(__name__)
@@ -15,7 +17,7 @@ def base():
     return "<p>Config validation server running.</p>"
 
 @app.post("/validate")
-def validate():
+def validate_config():
     """Server route to validate a user-supplied JSON configuration.
     The route accepts a POST request with the configuration in the 
     request body. Then, it conducts logic to:
@@ -35,6 +37,13 @@ def validate():
     except (json.decoder.JSONDecodeError, FileNotFoundError) as err:
         return Response(response=str(err), status=HTTPStatus.BAD_REQUEST)
 
+    # Validate configuration in request body against schema
+    request_json = request.get_json(silent=False)
+    try:
+        validate(request_json, schema)
+    except (ValidationError, SchemaError) as err:
+        return Response(response=str(err), status=HTTPStatus.BAD_REQUEST)
+
     
-    return schema
+    return request_json, HTTPStatus.OK
 
