@@ -1,8 +1,10 @@
 import json
-from flask import Flask, Response, request
 from http import HTTPStatus
+
+from flask import Flask, Response, request
 from jsonschema import validate
-from jsonschema.exceptions import ValidationError, SchemaError
+from jsonschema.exceptions import SchemaError, ValidationError
+
 from api.utils import load_schema
 
 app = Flask(__name__)
