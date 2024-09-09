@@ -1,4 +1,4 @@
-import json 
+import json
 from flask import Flask, Response, request
 from http import HTTPStatus
 from jsonschema import validate
@@ -6,6 +6,7 @@ from jsonschema.exceptions import ValidationError, SchemaError
 from api.utils import CONSTANTS, load_schema
 
 app = Flask(__name__)
+
 
 @app.route("/")
 def base():
@@ -15,10 +16,11 @@ def base():
     """
     return "<p>Config validation server running.</p>"
 
+
 @app.post("/validate")
 def validate_config():
     """Server route to validate a user-supplied JSON configuration.
-    The route accepts a POST request with the configuration in the 
+    The route accepts a POST request with the configuration in the
     request body. Then, it conducts logic to:
     1. Load the schema (locally or from Azure storage)
     2. Validate the configuration against the schema,
@@ -27,10 +29,10 @@ def validate_config():
     Returns:
         flask.Response: response object with valid JSON or error message.
     """
-    
+
     # Load schema; locally for now. Return early if loading fails
     try:
-       schema = load_schema(local=True)
+        schema = load_schema(local=True)
     except (json.decoder.JSONDecodeError, FileNotFoundError) as err:
         return Response(response=str(err), status=HTTPStatus.BAD_REQUEST)
 
@@ -41,8 +43,8 @@ def validate_config():
     except (ValidationError, SchemaError) as err:
         return Response(response=str(err), status=HTTPStatus.BAD_REQUEST)
 
-    
     return request_json, HTTPStatus.OK
+
 
 if __name__ == "__main__":
     app.run(debug=True)
