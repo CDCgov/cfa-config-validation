@@ -1,5 +1,5 @@
-import os
 import json
+import os
 
 CONSTANTS = {
     "base_dir": os.path.abspath(os.path.dirname(__file__)),

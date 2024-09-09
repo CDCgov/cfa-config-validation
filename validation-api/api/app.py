@@ -3,7 +3,7 @@ from flask import Flask, Response, request
 from http import HTTPStatus
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError, SchemaError
-from api.utils import CONSTANTS, load_schema
+from api.utils import load_schema
 
 app = Flask(__name__)
 
