@@ -30,4 +30,4 @@ jobs:
         run: cd validation-api && pip install -r requirements.txt
 
       - name: run tests
-        run: poetry run pytest
+        run: cd validation-api && poetry run pytest
