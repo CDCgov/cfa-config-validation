@@ -26,5 +26,8 @@ jobs:
       - name: install pytest
         run: pip install pytest
 
+      - name: install api packages
+        run: cd validation-api && pip install -r requirements.txt
+
       - name: run tests
-        run: cd validation-api && poetry run pytest 
+        run: poetry run pytest
