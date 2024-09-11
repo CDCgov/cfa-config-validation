@@ -1,7 +1,7 @@
 import json
 from http import HTTPStatus
 
-from api.utils import load_schema
+from utils import load_schema
 from flask import Flask, Response, request
 from jsonschema import validate
 from jsonschema.exceptions import SchemaError, ValidationError
@@ -48,4 +48,4 @@ def validate_config():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0")
