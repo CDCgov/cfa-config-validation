@@ -10,4 +10,5 @@ COPY . .
 
 EXPOSE 5000
 ENV PYTHONPATH="${PYTHONPATH}:/app"
-CMD ["flask", "--app", "api/app.py", "run", "--host=0.0.0.0"]
+CMD ["flask", "--app", "/app/api/app.py", "run", "--host=0.0.0.0"]
+
