@@ -1,4 +1,4 @@
-COMMANDS = build run push-to-registry deploy login
+COMMANDS = build run push-to-registry login
 
 .PHONY: $(COMMANDS)
 
