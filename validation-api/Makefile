@@ -11,7 +11,7 @@ build:
 run:
 	docker-compose up
 
-login: 
+login:
 	az login
 
 push-to-registry: build
