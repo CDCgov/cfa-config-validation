@@ -43,4 +43,4 @@ jobs:
         run: |
           cd validation-api
           source .venv/bin/activate
-          pytest tests/
+          poetry run pytest
