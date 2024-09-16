@@ -30,4 +30,4 @@ jobs:
         run: cd validation-api && poetry install
 
       - name: run tests
-        run: cd validation-api && poetry shell && poetry run pytest
+        run: cd validation-api && source $(poetry env info --path)/bin/activate && poetry run pytest
