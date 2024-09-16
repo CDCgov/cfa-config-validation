@@ -41,6 +41,6 @@ jobs:
 
       - name: Run tests
         run: |
-          source .venv/bin/activate
           cd validation-api
+          source .venv/bin/activate
           pytest tests/
