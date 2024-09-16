@@ -35,6 +35,7 @@ rpds-py = "0.20.0"
 urllib3 = "2.2.2"
 virtualenv = "20.26.3"
 werkzeug = "3.0.4"
+pytest = "^8.3.3"
 
 
 [build-system]
