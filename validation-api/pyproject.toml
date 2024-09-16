@@ -36,6 +36,9 @@ urllib3 = "2.2.2"
 virtualenv = "20.26.3"
 werkzeug = "3.0.4"
 pytest = "^8.3.3"
+azure-identity = "^1.17.1"
+azure-keyvault = "^4.2.0"
+toml = "^0.10.2"
 
 
 [build-system]
