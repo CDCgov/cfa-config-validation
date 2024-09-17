@@ -4,7 +4,7 @@ import os
 CONSTANTS = {
     "base_dir": os.path.abspath(os.path.dirname(__file__)),
     "local_schema_path": "local_schema.json",
-    "auth_config_path": "azure_utils/config.toml"
+    "auth_config_path": "azure_utils/config.toml",
 }
 
 

@@ -2,8 +2,8 @@ import json
 import os
 from http import HTTPStatus
 
-from api.utils import load_schema, CONSTANTS
-from azure_utils.auth import read_config, obtain_credential
+from api.utils import CONSTANTS, load_schema
+from azure_utils.auth import obtain_credential, read_config
 from flask import Flask, Response, request
 from jsonschema import validate
 from jsonschema.exceptions import SchemaError, ValidationError
