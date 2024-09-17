@@ -1,13 +1,7 @@
 import toml
-from azure.identity import (
-    AzureCliCredential,
-    ChainedTokenCredential,
-    ClientSecretCredential,
-    DefaultAzureCredential,
-    EnvironmentCredential
-)
+import os
+from azure.identity import ClientSecretCredential
 
-from azure.keyvault.secrets import SecretClient
 
 def read_config(config_path):
     """Read local Azure configuration file.
@@ -19,6 +13,7 @@ def read_config(config_path):
     config = toml.load(config_path)
     return config
 
+
 def obtain_credential(config, credential_type="default"):
     """Obtains client credentials from Azure KeyVault.
     Args:
@@ -27,4 +22,16 @@ def obtain_credential(config, credential_type="default"):
         Instance of ClientSecretCredential.
     """
 
-    
+    # Since this will be run from a Docker container,
+    # we only use the SP Credential to Authenticate.
+
+    # Pull values from injected environment variables
+    tenant_id = os.environ.get("TENANT_ID", "")
+    application_id = os.environ.get("APPLICATION_ID", "")
+    client_secret = os.environ.get("SP_SECRET", "")
+
+    sp_credential = ClientSecretCredential(
+        tenant_id=tenant_id, client_id=application_id, client_secret=client_secret
+    )
+
+    return sp_credential, client_secret
