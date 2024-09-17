@@ -1,5 +1,4 @@
 import json
-import os
 from http import HTTPStatus
 
 from api.utils import CONSTANTS, load_schema

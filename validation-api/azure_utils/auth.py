@@ -1,5 +1,6 @@
-import toml
 import os
+
+import toml
 from azure.identity import ClientSecretCredential
 
 
@@ -31,7 +32,9 @@ def obtain_credential(config, credential_type="default"):
     client_secret = os.environ.get("SP_SECRET", "")
 
     sp_credential = ClientSecretCredential(
-        tenant_id=tenant_id, client_id=application_id, client_secret=client_secret
+        tenant_id=tenant_id,
+        client_id=application_id,
+        client_secret=client_secret,
     )
 
     return sp_credential, client_secret
