@@ -32,10 +32,15 @@ def validate_config():
         flask.Response: response object with valid JSON or error message.
     """
 
-    # Load schema; locally for now. Return early if loading fails
+    # Load schema either locally or from Azure, depending on url param.
+    use_local = request.args.get("local", default=False, type=bool)
     try:
-        schema = load_schema(local=True)
-    except (json.decoder.JSONDecodeError, FileNotFoundError) as err:
+        schema = load_schema(local=use_local)
+    except (
+        json.decoder.JSONDecodeError,
+        FileNotFoundError,
+        ValueError,
+    ) as err:
         return Response(response=str(err), status=HTTPStatus.BAD_REQUEST)
 
     # Validate configuration in request body against schema
