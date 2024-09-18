@@ -47,8 +47,8 @@ def load_schema(local=True):
     sp_credential = obtain_sp_credential()
     schema = obtain_schema_from_blob_storage(
         sp_credential=sp_credential,
-        account_url=CONSTANTS["azure_storage_account_url"],
-        container_name=CONSTANTS["azure_container_name"],
-        blob_name=CONSTANTS["azure_schema_filename"],
+        account_url=CONSTANTS.get("azure_storage_account_url", ""),
+        container_name=CONSTANTS.get("azure_container_name", ""),
+        blob_name=CONSTANTS.get("azure_schema_filename", ""),
     )
     return schema
