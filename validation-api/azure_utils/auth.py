@@ -1,4 +1,5 @@
 import os
+
 import toml
 from azure.identity import DefaultAzureCredential
 
