@@ -30,6 +30,9 @@ def obtain_credential(config, credential_type="default"):
     tenant_id = os.environ.get("TENANT_ID", "")
     application_id = os.environ.get("APPLICATION_ID", "")
     client_secret = os.environ.get("SP_SECRET", "")
+    if "" in [tenant_id, client_secret, application_id]:
+        error_message = "Azure secrets not found in environment. Ensure secrets are configured properly."
+        raise ValueError(error_message)
 
     sp_credential = ClientSecretCredential(
         tenant_id=tenant_id,
