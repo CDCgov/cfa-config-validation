@@ -4,3 +4,7 @@ services:
     ports:
       - "5000:5000"
     image: cfaprdbatchcr.azurecr.io/config-validation-service:latest
+    environment:
+      TENANT_ID: ${TENANT_ID}
+      APPLICATION_ID: ${APPLICATION_ID}
+      SP_SECRET: ${SP_SECRET}
