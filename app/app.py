@@ -1,7 +1,7 @@
 import json
 from http import HTTPStatus
 
-from api.utils import load_schema
+from app.utils import load_schema
 from azure_utils.auth import obtain_sp_credential
 from flask import Flask, Response, request
 from jsonschema import validate

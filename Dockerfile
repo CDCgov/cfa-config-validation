@@ -14,7 +14,7 @@ RUN python3 -m venv $POETRY_VENV \
 # Add `poetry` to PATH
 ENV PATH="${PATH}:${POETRY_VENV}/bin"
 
-WORKDIR /app
+WORKDIR /cfa-config-validation
 
 # Install dependencies
 COPY poetry.lock pyproject.toml ./
@@ -23,5 +23,5 @@ RUN poetry install
 COPY . .
 
 EXPOSE 5000
-ENV PYTHONPATH="${PYTHONPATH}:/app"
-CMD ["poetry", "run", "python", "-m", "flask", "--app", "/app/api/app.py", "run", "--host=0.0.0.0"]
+ENV PYTHONPATH="${PYTHONPATH}:/src"
+CMD ["poetry", "run", "python", "-m", "flask", "--app", "/cfa-config-validation/app/app.py", "run", "--host=0.0.0.0"]
