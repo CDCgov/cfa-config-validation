@@ -2,7 +2,7 @@ COMMANDS = build run push-to-registry login
 
 .PHONY: $(COMMANDS)
 
-AZURE_CR_NAME := cfaprdbatchcr
+AZURE_CR_NAME := cfaprdconfigvalidation
 IMAGE_NAME = '$(AZURE_CR_NAME).azurecr.io/config-validation-service:latest'
 
 build:
