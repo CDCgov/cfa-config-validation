@@ -10,37 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
+            - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-        with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-          virtualenvs-path: .venv
-          installer-parallel: true
-
-      #----------------------------------------------
-      #       load cached venv if cache exists
-      #----------------------------------------------
-      - name: Load cached venv
-        id: cached-poetry-dependencies
+      - name: cache poetry
         uses: actions/cache@v4
         with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-      #----------------------------------------------
-      # install dependencies if cache does not exist
-      #----------------------------------------------
-      - name: Install dependencies
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: cd validation-api && poetry install --no-interaction --no-root
+          path: ~/.local
+          key: ${{ runner.os }}-poetry
 
-      - name: Run tests
-        run: |
-          cd validation-api
-          source .venv/bin/activate
-          poetry run pytest
+      - name: install poetry
+        run: pip install poetry
+
+      - name: install api packages
+        run: poetry install
+        
+      - name: run tests
+        run: poetry run pytest
+
