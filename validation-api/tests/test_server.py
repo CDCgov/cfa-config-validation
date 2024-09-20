@@ -20,7 +20,7 @@ def test_valid_configuration():
     with open(config_path) as fp:
         config = json.load(fp)
 
-    response = client.post("/validate", json=config)
+    response = client.post("/validate?local=True", json=config)
     assert response.status == "200 OK"
     assert json.loads(response.data) == config
 
@@ -31,7 +31,7 @@ def test_invalid_configuration():
     with open(config_path) as fp:
         config = json.load(fp)
 
-    response = client.post("/validate", json=config)
+    response = client.post("/validate?local=True", json=config)
     assert response.status == "400 BAD REQUEST"
     assert (
         "Additional properties are not allowed ('reference_date', 'report_date' were unexpected)"

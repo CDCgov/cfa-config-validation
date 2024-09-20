@@ -1,8 +1,8 @@
 import json
 from http import HTTPStatus
 
-from api.utils import CONSTANTS, load_schema
-from azure_utils.auth import obtain_credential, read_config
+from api.utils import load_schema
+from azure_utils.auth import obtain_sp_credential
 from flask import Flask, Response, request
 from jsonschema import validate
 from jsonschema.exceptions import SchemaError, ValidationError
@@ -32,10 +32,15 @@ def validate_config():
         flask.Response: response object with valid JSON or error message.
     """
 
-    # Load schema; locally for now. Return early if loading fails
+    # Load schema either locally or from Azure, depending on url param.
+    use_local = request.args.get("local", default=False, type=bool)
     try:
-        schema = load_schema(local=True)
-    except (json.decoder.JSONDecodeError, FileNotFoundError) as err:
+        schema = load_schema(local=use_local)
+    except (
+        json.decoder.JSONDecodeError,
+        FileNotFoundError,
+        ValueError,
+    ) as err:
         return Response(response=str(err), status=HTTPStatus.BAD_REQUEST)
 
     # Validate configuration in request body against schema
@@ -54,11 +59,8 @@ def auth():
     Returns:
         flask.Response: response object with success string or error message.
     """
-    config_path = CONSTANTS.get("auth_config_path", "")
-    config = read_config(config_path)
-
     try:
-        obtain_credential(config, credential_type="default")
+        obtain_sp_credential()
     except (ValueError, LookupError) as err:
         return Response(response=str(err), status=HTTPStatus.UNAUTHORIZED)
 
