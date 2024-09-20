@@ -1,8 +1,8 @@
-COMMANDS = build run push-to-registry login
+COMMANDS = build run push-to-registry login test
 
 .PHONY: $(COMMANDS)
 
-AZURE_CR_NAME := cfaprdbatchcr
+AZURE_CR_NAME := cfaprdconfigvalidation
 IMAGE_NAME = '$(AZURE_CR_NAME).azurecr.io/config-validation-service:latest'
 
 build:
@@ -17,3 +17,6 @@ login:
 push-to-registry: build
 	az acr login --name $(AZURE_CR_NAME)
 	docker push $(IMAGE_NAME)
+
+test:
+	poetry run pytest

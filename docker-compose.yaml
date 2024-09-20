@@ -3,7 +3,7 @@ services:
     build: .
     ports:
       - "5000:5000"
-    image: cfaprdbatchcr.azurecr.io/config-validation-service:latest
+    image: cfaprdconfigvalidation.azurecr.io/config-validation-service:latest
     environment:
       AZURE_TENANT_ID: ${AZURE_TENANT_ID}
       AZURE_CLIENT_ID: ${AZURE_CLIENT_ID}

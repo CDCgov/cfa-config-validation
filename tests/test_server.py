@@ -2,7 +2,7 @@ import json
 import os
 from pathlib import Path
 
-from api.app import app
+from app.app import app
 
 client = app.test_client()
 data_dir = Path(__file__).parent / "data"
