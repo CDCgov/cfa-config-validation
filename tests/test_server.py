@@ -1,6 +1,7 @@
 import json
 import os
 from pathlib import Path
+
 from app.app import app
 
 client = app.test_client()

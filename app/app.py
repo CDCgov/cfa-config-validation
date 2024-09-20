@@ -1,11 +1,12 @@
 import json
 from http import HTTPStatus
 
-from app.utils import load_schema
-from azure_utils.auth import obtain_sp_credential
 from flask import Flask, Response, request
 from jsonschema import validate
 from jsonschema.exceptions import SchemaError, ValidationError
+
+from app.utils import load_schema
+from azure_utils.auth import obtain_sp_credential
 
 app = Flask(__name__)
 
