@@ -23,5 +23,5 @@ RUN poetry install
 COPY . .
 
 EXPOSE 5000
-ENV PYTHONPATH="${PYTHONPATH}:/src"
+ENV PYTHONPATH="${PYTHONPATH}:/cfa-config-validation"
 CMD ["poetry", "run", "python", "-m", "flask", "--app", "/cfa-config-validation/app/app.py", "run", "--host=0.0.0.0"]
