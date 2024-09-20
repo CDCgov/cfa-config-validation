@@ -1,4 +1,4 @@
-COMMANDS = build run push-to-registry login
+COMMANDS = build run push-to-registry login test
 
 .PHONY: $(COMMANDS)
 
@@ -17,3 +17,6 @@ login:
 push-to-registry: build
 	az acr login --name $(AZURE_CR_NAME)
 	docker push $(IMAGE_NAME)
+
+test:
+	poetry run pytest
