@@ -42,6 +42,7 @@ def validate_config():
         FileNotFoundError,
         ValueError,
     ) as err:
+        app.logger.error(f"Loading schema failed with error: {str(err)}")
         return Response(response=str(err), status=HTTPStatus.BAD_REQUEST)
 
     # Validate configuration in request body against schema
@@ -49,6 +50,7 @@ def validate_config():
     try:
         validate(request_json, schema)
     except (ValidationError, SchemaError) as err:
+        app.logger.error(f"Invalid configuration: {str(err)}")
         return Response(response=str(err), status=HTTPStatus.BAD_REQUEST)
 
     return request_json, HTTPStatus.OK
@@ -63,6 +65,7 @@ def auth():
     try:
         obtain_sp_credential()
     except (ValueError, LookupError) as err:
+        app.logger.error(f"Failed to authenticate with Azure: {str(err)}")
         return Response(response=str(err), status=HTTPStatus.UNAUTHORIZED)
 
     return "Successfully logged into Azure.", HTTPStatus.OK
