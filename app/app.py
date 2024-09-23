@@ -72,4 +72,5 @@ def auth():
 
 
 if __name__ == "__main__":
+    app.logger.info("Config validation server running.")
     app.run(host="0.0.0.0")
