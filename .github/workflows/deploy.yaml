@@ -25,4 +25,4 @@ jobs:
       with:
         azcliversion: latest
         inlineScript: |
-          az acr login -n cfaprdconfigvalidation
+          docker --version
