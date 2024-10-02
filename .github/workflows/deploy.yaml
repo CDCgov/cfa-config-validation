@@ -23,6 +23,9 @@ jobs:
     - name: Azure ACR login
       uses: azure/docker-login@v2
       with:
-        azcliversion: latest
-        inlineScript: |
-          az acr login -n cfaprdconfigvalidation
+        login-server: cfaprdconfigvalidation.azurecr.io
+        username: {{ secrets.AZURE_CLIENT_ID }}
+        password: {{ secrets.AZURE_CLIENT_SECRET }}
+
+    - name: Test ACR login
+      run: az acr repository list --name cfaprdconfigvalidation
