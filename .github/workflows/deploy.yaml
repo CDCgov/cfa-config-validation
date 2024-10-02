@@ -17,9 +17,9 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Azure CLI script
+    - name: Azure ACR login
       uses: azure/cli@v2
       with:
         azcliversion: latest
         inlineScript: |
-          az account show
+          az acr login -n cfaprdconfigvalidation
