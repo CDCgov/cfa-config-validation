@@ -27,5 +27,9 @@ jobs:
         username: ${{ secrets.AZURE_CLIENT_ID }}
         password: ${{ secrets.AZURE_CLIENT_SECRET }}
 
-    - name: Build image
-      run: docker compose build --no-cache
+    - name: Build and push
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: false
+        tags: latest
