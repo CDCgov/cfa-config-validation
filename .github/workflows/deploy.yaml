@@ -27,5 +27,5 @@ jobs:
         username: ${{ secrets.AZURE_CLIENT_ID }}
         password: ${{ secrets.AZURE_CLIENT_SECRET }}
 
-    - name: Test ACR login
-      run: az acr repository list --name cfaprdconfigvalidation
+    - name: Build image
+      run: docker-compose build --no-cache
