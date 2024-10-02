@@ -1,0 +1,26 @@
+name: deploy
+
+# TODO remove the pull request, only use for testing
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+
+    - name: Azure Service Principal CLI login
+    - uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Azure CLI script
+      uses: azure/cli@v2
+      with:
+        azcliversion: latest
+        inlineScript: |
+          az account show
