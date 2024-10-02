@@ -28,4 +28,4 @@ jobs:
         password: ${{ secrets.AZURE_CLIENT_SECRET }}
 
     - name: Build image
-      run: docker-compose build --no-cache
+      run: docker build . --no-cache
