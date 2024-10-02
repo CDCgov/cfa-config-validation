@@ -31,4 +31,4 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: latest
+        tags: cfaprdconfigvalidation.azurecr.io/config-validation-service:latest
