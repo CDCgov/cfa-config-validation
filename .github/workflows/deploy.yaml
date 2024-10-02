@@ -17,6 +17,9 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    - name: Configure Docker
+      uses: docker/setup-buildx-action@v3
+
     - name: Azure ACR login
       uses: azure/cli@v2
       with:
