@@ -33,9 +33,13 @@ jobs:
         push: true
         tags: cfaprdconfigvalidation.azurecr.io/config-validation-service:latest
 
-    - name: Restart container
-      uses: azure/cli@v2
+    - name: Build and deploy Container App
+      uses: azure/container-apps-deploy-action@v1
       with:
-        azcliversion: latest
-        inlineScript: |
-          az container restart --resource-group EXT-EDAV-CFA-PRD --name cfaconfigvalidation
+        acrName: cfaprdconfigvalidation
+        containerAppName: configvalidation
+        resourceGroup: EXT-EDAV-CFA-PRD
+        imageToDeploy: cfaprdconfigvalidation.azurecr.io/config-validation-service:latest
+
+
+
