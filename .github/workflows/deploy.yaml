@@ -30,7 +30,7 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v6
       with:
-        push: false
+        push: true
         tags: cfaprdconfigvalidation.azurecr.io/config-validation-service:latest
 
     - name: Restart container
@@ -38,4 +38,4 @@ jobs:
       with:
         azcliversion: latest
         inlineScript: |
-          az container show --resource-group EXT-EDAV-CFA-PRD --name cfaconfigvalidation
+          az container restart --resource-group EXT-EDAV-CFA-PRD --name cfaconfigvalidation
