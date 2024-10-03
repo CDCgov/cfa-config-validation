@@ -31,7 +31,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: cfaprdconfigvalidation.azurecr.io/config-validation-service:latest
+        tags: cfaprdconfigvalidation.azurecr.io/config-validation-service:${{ github.sha }}
 
     - name: Build and deploy Container App
       uses: azure/container-apps-deploy-action@v1
@@ -39,7 +39,7 @@ jobs:
         acrName: cfaprdconfigvalidation
         containerAppName: configvalidation
         resourceGroup: EXT-EDAV-CFA-PRD
-        imageToDeploy: cfaprdconfigvalidation.azurecr.io/config-validation-service:latest
+        imageToDeploy: cfaprdconfigvalidation.azurecr.io/config-validation-service:${{ github.sha }}
 
 
 
