@@ -1,8 +1,6 @@
 name: deploy
 
-# TODO remove the pull request, only use for testing
 on:
-  pull_request:
   push:
     branches: [master]
 
@@ -40,6 +38,3 @@ jobs:
         containerAppName: configvalidation
         resourceGroup: EXT-EDAV-CFA-PRD
         imageToDeploy: cfaprdconfigvalidation.azurecr.io/config-validation-service:${{ github.sha }}
-
-
-

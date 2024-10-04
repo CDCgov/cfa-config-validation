@@ -17,7 +17,8 @@ def base():
     Returns:
         str: Startup message.
     """
-    return "<p>Config validation server running -testing automated deployment6.</p>"
+    return "<p>Config validation server running.</p>"
+
 
 @app.post("/validate")
 def validate_config():
