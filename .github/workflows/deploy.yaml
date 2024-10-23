@@ -7,7 +7,7 @@ on:
 jobs:
 
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: cfa-cdcgov
     environment: production
     steps:
     - name: Azure Service Principal CLI login
